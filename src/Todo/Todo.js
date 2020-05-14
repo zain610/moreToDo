@@ -1,4 +1,11 @@
 import React from "react";
+import "./Todo.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleDown,
+  faAngleUp,
+  faTrash
+} from "@fortawesome/free-solid-svg-icons";
 
 export default class Todo extends React.Component {
   constructor(props) {
@@ -16,35 +23,43 @@ export default class Todo extends React.Component {
     }));
   };
   render() {
-    return (
-      <div
-        class="todo"
-        style={{ margin: "0.75rem", borderBottom: "2px solid #333" }}
-      >
-        <div
-          class="header"
+    const iconDirection =
+      this.state.hide === true ? (
+        <FontAwesomeIcon
+          onClick={this.toggleStatus}
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "baseline"
+            fontSize: "2rem",
+            padding: "10px 10px 0 10px",
+            color: "mediumpurple"
           }}
-        >
+          icon={faAngleDown}
+        />
+      ) : (
+        <FontAwesomeIcon
+          onClick={this.toggleStatus}
+          style={{
+            fontSize: "2rem",
+            padding: "10px 10px 0 10px",
+            color: "mediumpurple"
+          }}
+          icon={faAngleUp}
+        />
+      );
+    return (
+      <div className="todo">
+        <div className="header">
           <h1>{this.props.todo.title}</h1>
-          <div class="action-btn-div">
-            <button
-              onClick={this.toggleStatus}
-              class="btn"
-              style={{ margin: "0.4rem" }}
-            >
-              Hide Body
-            </button>
-            <button
+          <div className="action-btn-div">
+            {iconDirection}
+            <FontAwesomeIcon
               onClick={this.props.removeTodo.bind(this, this.props.todo.id)}
-              class="btn"
-              style={{ margin: "0.4rem" }}
-            >
-              Remove
-            </button>
+              icon={faTrash}
+              style={{
+                fontSize: "1.5rem",
+                padding: "10px 10px 0 10px",
+                color: "#333"
+              }}
+            />
           </div>
         </div>
         {this.state.hide === false ? <p>{this.props.todo.body}</p> : ""}

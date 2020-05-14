@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0 0.5rem;
+}
+
+.todo {
+  margin: 0.75rem;
+  border-bottom: 2px solid #333;
+}

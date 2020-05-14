@@ -54,10 +54,15 @@ export default function Header(props) {
         break;
     }
   };
+  const resetForm = () => {
+    setTitle("");
+    setBody("");
+  };
   const handleSubmit = () => {
     //close modal and send the data to the parent component
     closeModal();
     props.addTodo(title, body);
+    resetForm();
   };
   return (
     <div
