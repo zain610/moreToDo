@@ -32,22 +32,21 @@ class App extends React.Component {
       inputValue: event.target.value
     });
   };
-  addTodo = () => {
+  addTodo = (title, body) => {
     //unshift the state todos
     //wait for user input -- title is important
     //save the todo
+    console.log(title, body);
+    let newTodo = {
+      id: this.state.todos.length + 1,
+      title,
+      body
+    };
     this.setState(state => ({
-      showTodoForm: !state.showTodoForm
+      todos: [newTodo, ...state.todos]
     }));
-    // let newTodo = {
-    //   id: 3,
-    //   title: "Enter title",
-    //   body: "Enter Body"
-    // };
-    // this.setState(state => ({
-    //   todos: [newTodo, ...state.todos]
-    // }));
   };
+
   render() {
     console.log(this.state.todos);
     const filteredTodos = this.state.todos.filter(todo => {

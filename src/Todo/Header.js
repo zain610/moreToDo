@@ -29,13 +29,36 @@ const customStyles = {
 };
 Modal.setAppElement("#root");
 export default function Header(props) {
-  const [modalIsOpen, setIsOpen] = React.useState(true);
+  //create a hook for toggling the modal state
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  //create a hook for preserving title and body content of the form
+  const [title, setTitle] = React.useState("");
+  const [body, setBody] = React.useState("");
   function openModal() {
     setIsOpen(true);
   }
   function closeModal() {
     setIsOpen(false);
   }
+  const onChangeHandler = e => {
+    const nodeName = e.target.name;
+    const nodeValue = e.target.value;
+    switch (nodeName) {
+      case "title":
+        console.log("title was enteredd");
+        setTitle(nodeValue);
+        break;
+      case "body":
+        console.log("body was clicked");
+        setBody(nodeValue);
+        break;
+    }
+  };
+  const handleSubmit = () => {
+    //close modal and send the data to the parent component
+    closeModal();
+    props.addTodo(title, body);
+  };
   return (
     <div
       style={{ width: "100%", display: "flex", justifyContent: "space-around" }}
@@ -85,6 +108,8 @@ export default function Header(props) {
       >
         <div style={{ margin: "0.75rem", borderBottom: "2px solid #333" }}>
           <input
+            onChange={onChangeHandler}
+            name="title"
             placeholder="Enter Title"
             style={{
               border: "none",
@@ -100,10 +125,12 @@ export default function Header(props) {
           style={{
             margin: "0.75rem",
             borderBottom: "2px solid #333",
-            height: "80%"
+            height: "60%"
           }}
         >
           <textarea
+            onChange={onChangeHandler}
+            name="body"
             placeholder="Enter Body"
             style={{
               border: "none",
@@ -116,6 +143,9 @@ export default function Header(props) {
             }}
           />
         </div>
+        <button onClick={handleSubmit} class="submit-btn">
+          Submit
+        </button>
       </Modal>
     </div>
   );

@@ -17,8 +17,17 @@ body {
   border-top: 0.75rem solid grey;
   border-radius: 5px;
   width: 50%;
-  height: max-content;
-
+  height: 80%;
+  overflow: auto;
   align-content: center;
   background-color: #e9f5f7;
+}
+
+.submit-btn {
+  position: absolute;
+  width: 15%;
+  height: 10%;
+  background: lightsteelblue;
+  left: 40%;
+  bottom: 1%;
 }
