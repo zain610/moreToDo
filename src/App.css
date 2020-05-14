@@ -7,3 +7,18 @@
 body {
   background-color: #031114;
 }
+.App {
+  position: absolute;
+  left: 25%;
+  right: 40%;
+  top: 10%;
+  bottom: 50%;
+  border: 0.2rem solid grey;
+  border-top: 0.75rem solid grey;
+  border-radius: 5px;
+  width: 50%;
+  height: max-content;
+
+  align-content: center;
+  background-color: #e9f5f7;
+}

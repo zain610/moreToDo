@@ -3,7 +3,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import Todo from "./Todo/Todo";
 import Header from "./Todo/Header";
-
 class App extends React.Component {
   constructor() {
     super();
@@ -16,7 +15,8 @@ class App extends React.Component {
         },
         { id: 2, title: "What is this?", body: "GG all" }
       ],
-      inputValue: ""
+      inputValue: "",
+      showTodoForm: false
     };
     // this.removeTodo = this.removeTodo.bind(this);
   }
@@ -36,16 +36,18 @@ class App extends React.Component {
     //unshift the state todos
     //wait for user input -- title is important
     //save the todo
-    let newTodo = {
-      id: 3,
-      title: "Enter title",
-      body: "Enter Body"
-    };
     this.setState(state => ({
-      todos: [newTodo, ...state.todos]
+      showTodoForm: !state.showTodoForm
     }));
+    // let newTodo = {
+    //   id: 3,
+    //   title: "Enter title",
+    //   body: "Enter Body"
+    // };
+    // this.setState(state => ({
+    //   todos: [newTodo, ...state.todos]
+    // }));
   };
-
   render() {
     console.log(this.state.todos);
     const filteredTodos = this.state.todos.filter(todo => {
@@ -54,20 +56,17 @@ class App extends React.Component {
         todo.body.toLowerCase().includes(this.state.inputValue)
       );
     });
+    const todoForm = (
+      <div>
+        <label>Enter Title</label>
+        <input type="text" />
+        <label> Enter Body</label>
+        <input type="text" />
+      </div>
+    );
 
     return (
-      <div
-        className="App"
-        style={{
-          border: "0.2rem solid grey",
-          borderTop: "0.75rem solid grey",
-          borderRadius: "5px",
-          width: "30%",
-          margin: "1rem 30rem",
-          alignContent: "center",
-          backgroundColor: "#e9f5f7"
-        }}
-      >
+      <div className="App">
         <Header
           inputValue={this.state.inputValue}
           todoFilterOnChange={this.todoFilterOnChange}
