@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+# moreToDo
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -68,6 +68,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 =======
-# moreToDo
-A Todo app that trumps em all
->>>>>>> 637387213e962244efc6102814e9f1cf23a7dcc3
+
