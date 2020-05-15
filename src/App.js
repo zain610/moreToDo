@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Todo from "./Todo/Todo";
 import Header from "./Todo/Header";
@@ -13,13 +12,14 @@ class App extends React.Component {
           title: "Hello",
           body: "Hello Everyone, welcome to my TED Talk what"
         },
-        { id: 2, title: "What is this?", body: "GG all" }
+        { id: 2, title: "Lorem Ipsum", body: "GG all" }
       ],
       inputValue: "",
       showTodoForm: false
     };
     // this.removeTodo = this.removeTodo.bind(this);
   }
+
   //ProTip: Use arrow functions over regular functions to bind _this. Else you need to manually bind this in the constructor
   removeTodo = id => {
     console.log("id", id);
@@ -55,14 +55,6 @@ class App extends React.Component {
         todo.body.toLowerCase().includes(this.state.inputValue)
       );
     });
-    const todoForm = (
-      <div>
-        <label>Enter Title</label>
-        <input type="text" />
-        <label> Enter Body</label>
-        <input type="text" />
-      </div>
-    );
 
     return (
       <div className="App">
