@@ -14,10 +14,8 @@ class App extends React.Component {
         },
         { id: 2, title: "Lorem Ipsum", body: "GG all" }
       ],
-      inputValue: "",
-      showTodoForm: false
+      inputValue: ""
     };
-    // this.removeTodo = this.removeTodo.bind(this);
   }
 
   //ProTip: Use arrow functions over regular functions to bind _this. Else you need to manually bind this in the constructor
