@@ -2,6 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-modal";
+import { addTodo, updateSearchValue } from "../../actions/actions";
+import { connect } from "react-redux";
 
 const customStyles = {
   content: {
@@ -28,7 +30,7 @@ const customStyles = {
   }
 };
 Modal.setAppElement("#root");
-export default function Header(props) {
+function Header({ dispatch }) {
   //create a hook for toggling the modal state
   const [modalIsOpen, setIsOpen] = React.useState(false);
   //create a hook for preserving title and body content of the form
@@ -61,7 +63,8 @@ export default function Header(props) {
   const handleSubmit = () => {
     //close modal and send the data to the parent component
     closeModal();
-    props.addTodo(title, body);
+    console.log({ title, body });
+    dispatch(addTodo({ title: title, body: body }));
     resetForm();
   };
   return (
@@ -69,7 +72,9 @@ export default function Header(props) {
       style={{ width: "100%", display: "flex", justifyContent: "space-around" }}
     >
       <input
-        onChange={props.todoFilterOnChange}
+        onChange={event =>
+          dispatch(updateSearchValue({ value: event.target.value }))
+        }
         placeholder="Search Something..."
         style={{
           border: "none",
@@ -155,3 +160,4 @@ export default function Header(props) {
     </div>
   );
 }
+export default connect()(Header);
