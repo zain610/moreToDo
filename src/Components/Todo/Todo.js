@@ -9,8 +9,7 @@ import {
 import { connect } from "react-redux";
 import { deleteTodo } from "../../actions/actions";
 
-function Todo({ todo, dispatch }) {
-  console.log(todo);
+function Todo({ listId, todo, dispatch, index }) {
   const [hide, toggleHide] = useState(true);
   const toggleStatus = () => {
     toggleHide(!hide);
@@ -39,7 +38,6 @@ function Todo({ todo, dispatch }) {
       />
     );
   const { id } = todo;
-  console.log(id);
   return (
     <div className="todo">
       <div className="header">
@@ -47,7 +45,10 @@ function Todo({ todo, dispatch }) {
         <div className="action-btn-div">
           {iconDirection}
           <FontAwesomeIcon
-            onClick={() => dispatch(deleteTodo({ id }))}
+            onClick={() => {
+              console.log(listId, index);
+              dispatch(deleteTodo({ listId, id }));
+            }}
             icon={faTrash}
             style={{
               fontSize: "1.5rem",

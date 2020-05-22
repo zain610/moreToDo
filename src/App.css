@@ -7,22 +7,23 @@
 body {
   background-color: #031114;
 }
-.App {
-  position: absolute;
-  left: 25%;
-  right: 40%;
-  top: 10%;
-  bottom: 50%;
+.todoList {
   border: 0.2rem solid grey;
   border-top: 0.75rem solid grey;
   border-radius: 5px;
-  width: 30%;
-  height: 80%;
+  min-width: 35%;
   overflow: auto;
-  align-content: center;
+  height: min-content;
+  /* height: 600px; */
+  /* align-content: center; */
   background-color: #e9f5f7;
+  margin: 1rem;
 }
-
+.App {
+  display: flex;
+  overflow-x: auto;
+  height: 100vh;
+}
 .submit-btn {
   position: absolute;
   width: 15%;

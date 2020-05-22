@@ -5,12 +5,46 @@ import { combineReducers } from "redux";
 //initialise state
 export const initialState = {
   todos: [
-    {
-      id: 1,
-      title: "Hello",
-      body: "Hello Everyone, welcome to my TED Talk what"
-    },
-    { id: 2, title: "Lorem Ipsum", body: "GG all" }
+    [
+      {
+        id: 1,
+        title: "List 1",
+        body: "Hello Everyone, welcome to my TED Talk what"
+      },
+      {
+        id: 2,
+        title: "List 1",
+        body: "Hello Everyone, welcome to my TED Talk what"
+      }
+    ],
+    [
+      {
+        id: 1,
+        title: "list 2 ",
+        body: "Body of todo list 2 item 1"
+      }
+    ],
+    [
+      {
+        id: 1,
+        title: "List 3",
+        body: "Body of todo list 2 item 1"
+      }
+    ],
+    [
+      {
+        id: 1,
+        title: "List 4",
+        body: "Body of todo list 2 item 1"
+      }
+    ],
+    [
+      {
+        id: 1,
+        title: "List 5",
+        body: "Body of todo list 2 item 1"
+      }
+    ]
   ],
   inputValue: "",
   showTodoForm: false
@@ -21,20 +55,36 @@ function todos(state = initialState, action) {
       return { state };
     case actions.ADD_TODO:
       console.log("payload", action);
-      const { title, body } = action.payload;
+      const { key = 0, title, body } = action.payload;
+
       return {
         ...state,
-        todos: [{ id: state.todos.length + 1, title, body }, ...state.todos]
+        todos: [
+          (todos[key] = [
+            { id: state.todos[key].length + 1, title, body },
+            ...state.todos[key]
+          ]),
+          ...state.todos
+        ]
       };
     case actions.DELETE_TODO:
-      console.log(action.payload);
-      const filteredTodos = state.todos.filter(todo => {
+      const { listId = 0 } = action.payload;
+      const newStateTodos = state.todos.slice();
+      const newTodo = state.todos[listId].filter(todo => {
+        console.log(todo, action.payload.id);
         return todo.id !== action.payload.id;
       });
-      return {
+      newStateTodos[listId] = newTodo;
+      console.log(newStateTodos);
+      // -- o --
+      //find a way to display fltered, remaining
+      const newObject = {
         ...state,
-        todos: filteredTodos
+        todos: newStateTodos
       };
+
+      // return newObject;
+      return newObject;
     case actions.UPDATE_SEARCH:
       return {
         ...state,
