@@ -22,7 +22,7 @@ function TodoList({ listId, todo, inputValue }) {
   });
   return (
     <div className="todoList">
-      <Header inputValue={inputValue} />
+      <Header listId={listId} inputValue={inputValue} />
       <hr />
       {}
       {filteredTodos.map((todo, index) => (
@@ -32,6 +32,6 @@ function TodoList({ listId, todo, inputValue }) {
   );
 }
 const mapStateToProps = state => ({
-  inputValue: state.todos.inputValue
+  inputValue: state.list.inputValue
 });
 export default connect(mapStateToProps)(TodoList);

@@ -3,56 +3,39 @@ import * as actions from "../actions/actions";
 import { combineReducers } from "redux";
 
 //initialise state
+// class TodoList {
+//   constructor(id, description, todo)
+//     id;
+//   description;
+//   todos = []
+// }
 export const initialState = {
-  todos: [
-    [
-      {
-        id: 1,
-        title: "List 1",
-        body: "Hello Everyone, welcome to my TED Talk what"
-      },
-      {
-        id: 2,
-        title: "List 1",
-        body: "Hello Everyone, welcome to my TED Talk what"
-      }
-    ],
-    [
-      {
-        id: 1,
-        title: "list 2 ",
-        body: "Body of todo list 2 item 1"
-      }
-    ],
-    [
-      {
-        id: 1,
-        title: "List 3",
-        body: "Body of todo list 2 item 1"
-      }
-    ],
-    [
-      {
-        id: 1,
-        title: "List 4",
-        body: "Body of todo list 2 item 1"
-      }
-    ],
-    [
-      {
-        id: 1,
-        title: "List 5",
-        body: "Body of todo list 2 item 1"
-      }
-    ]
+  list: [
+    {
+      id: 1,
+      header: "List 1",
+      todos: [
+        { title: "List 1 todo 1", body: "" },
+        { title: "List 1 todo 2", body: "alkjsnfasf" }
+      ]
+    },
+    {
+      id: 2,
+      header: "List 2",
+      todos: [
+        { title: "List 2 todo 1", body: "" },
+        { title: "List 12todo 2", body: "alkjsnfasf" }
+      ]
+    }
   ],
   inputValue: "",
   showTodoForm: false
 };
-function todos(state = initialState, action) {
+function list(state = initialState, action) {
   switch (action.type) {
     case actions.GET_TODOS:
       return { state };
+
     case actions.ADD_TODO:
       console.log("payload", action);
       const { key = 0, title, body } = action.payload;
@@ -60,7 +43,7 @@ function todos(state = initialState, action) {
       return {
         ...state,
         todos: [
-          (todos[key] = [
+          (list[key] = [
             { id: state.todos[key].length + 1, title, body },
             ...state.todos[key]
           ]),
@@ -96,7 +79,5 @@ function todos(state = initialState, action) {
 }
 // combineReducer generates a func that calls your reducer with the slices of the state selected based on the keys.
 // so the combineReducer({todos}) is equivalent to calling --todos: todos(state.todos, action)---
-const todoApp = combineReducers({
-  todos
-});
+const todoApp = combineReducers({ list });
 export default todoApp;
