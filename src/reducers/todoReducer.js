@@ -39,6 +39,7 @@ export const initialState = {
   showTodoForm: false
 };
 function list(state = initialState, action) {
+  const currentLists = state.list;
   switch (action.type) {
     case actions.GET_TODOS:
       return { state };
@@ -46,21 +47,8 @@ function list(state = initialState, action) {
     case actions.ADD_TODO:
       console.log("payload", action);
       const { listKey = 0, title, body } = action.payload;
-      const currentLists = state.list;
       const addNewTodo = [...currentLists[listKey].todos, { title, body }];
       const remainingListItems = state.list.splice(listKey, 1);
-
-      console.log(currentLists, addNewTodo, remainingListItems);
-
-      console.log(state.list[listKey]);
-      // state.list[listKey].todos.push({ title, body });
-      console.log([
-        (state.list[listKey] = {
-          ...state.list[listKey],
-          todos: addNewTodo
-        }),
-        remainingListItems
-      ]);
       return {
         ...state,
         list: [

@@ -6,10 +6,9 @@ import {
   faAngleUp,
   faTrash
 } from "@fortawesome/free-solid-svg-icons";
-import { connect } from "react-redux";
 import { deleteTodo } from "../../actions/actions";
 
-function Todo({ listId, todo, dispatch, index }) {
+export default function Todo({ listId, todo, dispatch, index }) {
   const [hide, toggleHide] = useState(true);
   const toggleStatus = () => {
     toggleHide(!hide);
@@ -62,5 +61,3 @@ function Todo({ listId, todo, dispatch, index }) {
     </div>
   );
 }
-
-export default connect()(Todo);
