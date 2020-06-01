@@ -63,7 +63,7 @@ function Header({ listId, dispatch }) {
   const handleSubmit = () => {
     //close modal and send the data to the parent component
     closeModal();
-    dispatch(addTodo({ title: title, body: body, key: listId }));
+    dispatch(addTodo({ title: title, body: body, listKey: listId }));
     resetForm();
   };
   return (

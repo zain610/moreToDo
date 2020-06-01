@@ -9,6 +9,13 @@ import { combineReducers } from "redux";
 //   description;
 //   todos = []
 // }
+
+/**
+ * return {
+        ...state,
+        list: [(list[newLength] = { id: 1, header, todos }), ...state.list]
+      };
+ */
 export const initialState = {
   list: [
     {
@@ -38,16 +45,30 @@ function list(state = initialState, action) {
 
     case actions.ADD_TODO:
       console.log("payload", action);
-      const { key = 0, title, body } = action.payload;
+      const { listKey = 0, title, body } = action.payload;
+      const currentLists = state.list;
+      const addNewTodo = [...currentLists[listKey].todos, { title, body }];
+      const remainingListItems = state.list.splice(listKey, 1);
 
+      console.log(currentLists, addNewTodo, remainingListItems);
+
+      console.log(state.list[listKey]);
+      // state.list[listKey].todos.push({ title, body });
+      console.log([
+        (state.list[listKey] = {
+          ...state.list[listKey],
+          todos: addNewTodo
+        }),
+        remainingListItems
+      ]);
       return {
         ...state,
-        todos: [
-          (list[key] = [
-            { id: state.todos[key].length + 1, title, body },
-            ...state.todos[key]
-          ]),
-          ...state.todos
+        list: [
+          (state.list[listKey] = {
+            ...state.list[listKey],
+            todos: addNewTodo
+          }),
+          ...remainingListItems
         ]
       };
     case actions.DELETE_TODO:

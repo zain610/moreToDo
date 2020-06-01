@@ -7,9 +7,9 @@ function App({ lists }) {
   console.log(lists);
   return (
     <div className="App">
-      {lists.map(todoList => {
+      {lists.map((todoList, index) => {
         const { id, header, todos } = todoList;
-        return <TodoList listId={id} key={id} todo={todos} />;
+        return <TodoList listId={index} key={id} todo={todos} />;
       })}
     </div>
   );
