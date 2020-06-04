@@ -13,20 +13,14 @@ function TodoList({ listId, todo, inputValue }) {
   //   }));
   // };
 
-  const filteredTodos = todo.filter(item => {
-    console.log("todoList", todo);
-    return (
-      item.title.toLowerCase().includes(inputValue) ||
-      item.body.toLowerCase().includes(inputValue)
-    );
-  });
+  const filteredTodos = todo;
   return (
     <div className="todoList">
       <Header listId={listId} inputValue={inputValue} />
       <hr />
       {}
-      {filteredTodos.map((todo, index) => (
-        <Todo listId={listId} key={todo.id} todo={todo} index={index} />
+      {filteredTodos.map((todo, i) => (
+        <Todo listId={listId} key={todo.id} todo={todo} index={i} />
       ))}
     </div>
   );

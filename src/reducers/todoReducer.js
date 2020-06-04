@@ -39,7 +39,7 @@ export const initialState = {
   showTodoForm: false
 };
 function list(state = initialState, action) {
-  const currentLists = state.list;
+  const currentLists = state.list.slice();
   switch (action.type) {
     case actions.GET_TODOS:
       return { state };
@@ -60,23 +60,18 @@ function list(state = initialState, action) {
         ]
       };
     case actions.DELETE_TODO:
-      const { listId = 0 } = action.payload;
-      const newStateTodos = state.todos.slice();
-      const newTodo = state.todos[listId].filter(todo => {
-        console.log(todo, action.payload.id);
-        return todo.id !== action.payload.id;
+      const { listId, todoId } = action.payload;
+      let newState = Object.assign({}, state);
+      let newTodos = newState.list[listId].todos.filter((_, i) => {
+        return i !== todoId;
       });
-      newStateTodos[listId] = newTodo;
-      console.log(newStateTodos);
-      // -- o --
-      //find a way to display fltered, remaining
-      const newObject = {
-        ...state,
-        todos: newStateTodos
-      };
+      newState.list[listId].todos = newTodos;
+      console.log("NEw state", newState, listId);
 
-      // return newObject;
-      return newObject;
+      return {
+        ...state,
+        list: [...newState.list]
+      };
     case actions.UPDATE_SEARCH:
       return {
         ...state,
