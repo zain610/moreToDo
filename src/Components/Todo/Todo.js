@@ -6,16 +6,15 @@ import {
   faAngleUp,
   faTrash
 } from "@fortawesome/free-solid-svg-icons";
-import { connect } from "react-redux";
 import { deleteTodo } from "../../actions/actions";
+import { connect } from "react-redux";
 
-function Todo({ todo, dispatch }) {
-  console.log(todo);
+function Todo({ listId, todo, dispatch, index }) {
+  const todoId = index;
   const [hide, toggleHide] = useState(true);
   const toggleStatus = () => {
     toggleHide(!hide);
   };
-
   const iconDirection =
     hide === true ? (
       <FontAwesomeIcon
@@ -38,8 +37,6 @@ function Todo({ todo, dispatch }) {
         icon={faAngleUp}
       />
     );
-  const { id } = todo;
-  console.log(id);
   return (
     <div className="todo">
       <div className="header">
@@ -47,7 +44,9 @@ function Todo({ todo, dispatch }) {
         <div className="action-btn-div">
           {iconDirection}
           <FontAwesomeIcon
-            onClick={() => dispatch(deleteTodo({ id }))}
+            onClick={() => {
+              dispatch(deleteTodo({ listId, todoId }));
+            }}
             icon={faTrash}
             style={{
               fontSize: "1.5rem",
@@ -61,5 +60,4 @@ function Todo({ todo, dispatch }) {
     </div>
   );
 }
-
 export default connect()(Todo);

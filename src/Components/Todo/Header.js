@@ -30,7 +30,7 @@ const customStyles = {
   }
 };
 Modal.setAppElement("#root");
-function Header({ dispatch }) {
+function Header({ listId, dispatch }) {
   //create a hook for toggling the modal state
   const [modalIsOpen, setIsOpen] = React.useState(false);
   //create a hook for preserving title and body content of the form
@@ -63,8 +63,7 @@ function Header({ dispatch }) {
   const handleSubmit = () => {
     //close modal and send the data to the parent component
     closeModal();
-    console.log({ title, body });
-    dispatch(addTodo({ title: title, body: body }));
+    dispatch(addTodo({ title: title, body: body, listKey: listId }));
     resetForm();
   };
   return (
@@ -73,7 +72,9 @@ function Header({ dispatch }) {
     >
       <input
         onChange={event =>
-          dispatch(updateSearchValue({ value: event.target.value }))
+          dispatch(
+            updateSearchValue({ list_ID: listId, value: event.target.value })
+          )
         }
         placeholder="Search Something..."
         style={{
