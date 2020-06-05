@@ -20,6 +20,7 @@ export const initialState = {
   list: [
     {
       id: 1,
+      inputValue: "",
       header: "List 1",
       todos: [
         { title: "List 1 todo 1", body: "" },
@@ -28,6 +29,7 @@ export const initialState = {
     },
     {
       id: 2,
+      inputValue: "",
       header: "List 2",
       todos: [
         { title: "List 2 todo 1", body: "" },
@@ -35,7 +37,6 @@ export const initialState = {
       ]
     }
   ],
-  inputValue: "",
   showTodoForm: false
 };
 function list(state = initialState, action) {
@@ -46,7 +47,7 @@ function list(state = initialState, action) {
 
     case actions.ADD_TODO:
       console.log("payload", action);
-      const { listKey = 0, title, body } = action.payload;
+      let { listKey = 0, title, body } = action.payload;
       const addNewTodo = [...currentLists[listKey].todos, { title, body }];
       const remainingListItems = state.list.splice(listKey, 1);
       return {
@@ -60,7 +61,7 @@ function list(state = initialState, action) {
         ]
       };
     case actions.DELETE_TODO:
-      const { listId, todoId } = action.payload;
+      let { listId, todoId } = action.payload;
       let newState = Object.assign({}, state);
       let newTodos = newState.list[listId].todos.filter((_, i) => {
         return i !== todoId;
@@ -73,9 +74,14 @@ function list(state = initialState, action) {
         list: [...newState.list]
       };
     case actions.UPDATE_SEARCH:
+      //gets new value entered by user and updates the input value of the todo list
+      let stateClone = Object.assign({}, state);
+
+      const { list_ID, value } = action.payload;
+      let newList = (stateClone.list[list_ID].inputValue = value);
       return {
         ...state,
-        inputValue: action.payload.value
+        list: [...stateClone.list]
       };
     default:
       return state;

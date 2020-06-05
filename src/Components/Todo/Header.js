@@ -72,7 +72,9 @@ function Header({ listId, dispatch }) {
     >
       <input
         onChange={event =>
-          dispatch(updateSearchValue({ value: event.target.value }))
+          dispatch(
+            updateSearchValue({ list_ID: listId, value: event.target.value })
+          )
         }
         placeholder="Search Something..."
         style={{

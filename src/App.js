@@ -8,8 +8,16 @@ function App({ lists }) {
   return (
     <div className="App">
       {lists.map((todoList, index) => {
-        const { id, header, todos } = todoList;
-        return <TodoList listId={index} key={id} todo={todos} />;
+        const { id, header, todos, inputValue } = todoList;
+        console.log(inputValue);
+        return (
+          <TodoList
+            inputValue={inputValue}
+            listId={index}
+            key={id}
+            todo={todos}
+          />
+        );
       })}
     </div>
   );

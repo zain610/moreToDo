@@ -12,8 +12,14 @@ function TodoList({ listId, todo, inputValue }) {
   //     todos: todos.filter(todo => todo.id !== id)
   //   }));
   // };
-
-  const filteredTodos = todo;
+  const filteredTodos = todo.filter(item => {
+    console.log("todoList", todo, inputValue);
+    return (
+      item.title.toLowerCase().includes(inputValue) ||
+      item.body.toLowerCase().includes(inputValue)
+    );
+  });
+  console.log(filteredTodos);
   return (
     <div className="todoList">
       <Header listId={listId} inputValue={inputValue} />
@@ -25,7 +31,5 @@ function TodoList({ listId, todo, inputValue }) {
     </div>
   );
 }
-const mapStateToProps = state => ({
-  inputValue: state.list.inputValue
-});
-export default connect(mapStateToProps)(TodoList);
+
+export default connect()(TodoList);
