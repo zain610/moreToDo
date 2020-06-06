@@ -12,21 +12,26 @@ function TodoList({ listId, todo, inputValue }) {
   //     todos: todos.filter(todo => todo.id !== id)
   //   }));
   // };
+
+  //Clicks on list border - mousedown
+  //get and record X and Y
+  const onMouseDownHandler = e => {
+    console.log(e.clientX, e.clientY);
+  };
+  //Leaves border - mouse up
+  //
   const filteredTodos = todo.filter(item => {
-    console.log("todoList", todo, inputValue);
     return (
       item.title.toLowerCase().includes(inputValue) ||
       item.body.toLowerCase().includes(inputValue)
     );
   });
-  console.log(filteredTodos);
   return (
-    <div className="todoList">
+    <div className="todoList" onMouseDown={onMouseDownHandler.bind(this)}>
       <Header listId={listId} inputValue={inputValue} />
       <hr />
-      {}
       {filteredTodos.map((todo, i) => (
-        <Todo listId={listId} key={todo.id} todo={todo} index={i} />
+        <Todo listId={listId} key={i} todo={todo} index={i} />
       ))}
     </div>
   );

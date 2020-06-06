@@ -47,11 +47,9 @@ function Header({ listId, dispatch }) {
     const nodeValue = e.target.value;
     switch (nodeName) {
       case "title":
-        console.log("title was enteredd");
         setTitle(nodeValue);
         break;
       case "body":
-        console.log("body was clicked");
         setBody(nodeValue);
         break;
     }
@@ -63,7 +61,9 @@ function Header({ listId, dispatch }) {
   const handleSubmit = () => {
     //close modal and send the data to the parent component
     closeModal();
-    dispatch(addTodo({ title: title, body: body, listKey: listId }));
+    const sendFormObject = { title: title, body: body, listKey: listId };
+    console.log(sendFormObject);
+    dispatch(addTodo(sendFormObject));
     resetForm();
   };
   return (
@@ -86,7 +86,7 @@ function Header({ listId, dispatch }) {
           fontSize: "x-large"
         }}
       />
-      <div style={{ "border-left": "2px solid #333", margin: "5px 0 0 5px" }} />
+      <div style={{ borderLeft: "2px solid #333", margin: "5px 0 0 5px" }} />
       <FontAwesomeIcon
         style={{
           fontSize: "2rem",

@@ -41,47 +41,45 @@ export const initialState = {
 };
 function list(state = initialState, action) {
   const currentLists = state.list.slice();
+  const newState = Object.assign({}, state);
   switch (action.type) {
     case actions.GET_TODOS:
       return { state };
 
     case actions.ADD_TODO:
-      console.log("payload", action);
       let { listKey = 0, title, body } = action.payload;
-      const addNewTodo = [...currentLists[listKey].todos, { title, body }];
+      //push title and body to the new state
+      newState.list[listKey].todos.push({ title, body });
       const remainingListItems = state.list.splice(listKey, 1);
+      //replace the OG state by (1) add a new list with new todos (2) splice the OG list
+      //this will create side effects such as changing the order of the todos. We can probs change it from a grid like layout to a more dynamic layout.
       return {
         ...state,
         list: [
           (state.list[listKey] = {
             ...state.list[listKey],
-            todos: addNewTodo
+            todos: [...newState.list[listKey].todos]
           }),
           ...remainingListItems
         ]
       };
     case actions.DELETE_TODO:
       let { listId, todoId } = action.payload;
-      let newState = Object.assign({}, state);
       let newTodos = newState.list[listId].todos.filter((_, i) => {
         return i !== todoId;
       });
       newState.list[listId].todos = newTodos;
-      console.log("NEw state", newState, listId);
-
       return {
         ...state,
         list: [...newState.list]
       };
     case actions.UPDATE_SEARCH:
       //gets new value entered by user and updates the input value of the todo list
-      let stateClone = Object.assign({}, state);
-
       const { list_ID, value } = action.payload;
-      let newList = (stateClone.list[list_ID].inputValue = value);
+      let newList = (newState.list[list_ID].inputValue = value);
       return {
         ...state,
-        list: [...stateClone.list]
+        list: [...newState.list]
       };
     default:
       return state;

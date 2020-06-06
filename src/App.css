@@ -9,9 +9,9 @@ body {
 }
 .todoList {
   border: 0.2rem solid grey;
-  border-top: 0.75rem solid grey;
+  border-top: 1rem solid grey;
   border-radius: 5px;
-  min-width: 35%;
+  width: 35%;
   overflow: auto;
   height: min-content;
   /* height: 600px; */
@@ -21,6 +21,7 @@ body {
 }
 .App {
   display: flex;
+  flex-flow: row;
   overflow-x: auto;
   height: 100vh;
 }
