@@ -1,7 +1,6 @@
 //import actions
 import * as actions from "../actions/actions";
-import { combineReducers } from "redux";
-import update from 'immutability-helper'
+import {initialState} from "../Constants/InitialState"
 
 //initialise state
 // class TodoList {
@@ -11,36 +10,8 @@ import update from 'immutability-helper'
 //   todos = []
 // }
 
-/**
- * return {
-        ...state,
-        list: [(list[newLength] = { id: 1, header, todos }), ...state.list]
-      };
- */
-export const initialState = {
-  list: [
-    {
-      id: 1,
-      inputValue: "",
-      header: "List 1",
-      todos: [
-        { title: "List 1 todo 1", body: "" },
-        { title: "List 1 todo 2", body: "alkjsnfasf" }
-      ]
-    },
-    {
-      id: 2,
-      inputValue: "",
-      header: "List 2",
-      todos: [
-        { title: "List 2 todo 1", body: "" },
-        { title: "List 12todo 2", body: "alkjsnfasf" }
-      ]
-    }
-  ],
-  showTodoForm: false
-};
-function list(state = initialState, action) {
+
+function todo(state = initialState, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
     case actions.GET_TODOS:
@@ -78,7 +49,5 @@ function list(state = initialState, action) {
       return state;
   }
 }
-// combineReducer generates a func that calls your reducer with the slices of the state selected based on the keys.
-// so the combineReducer({todos}) is equivalent to calling --todos: todos(state.todos, action)---
-const todoApp = combineReducers({ list });
-export default todoApp;
+
+export default todo;

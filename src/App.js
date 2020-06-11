@@ -3,7 +3,7 @@ import "./App.css";
 import TodoList from "./Components/TodoList/TodoList";
 
 import { connect } from "react-redux";
-function App({ lists }) {
+function App({ lists, dispatch }) {
   console.log(lists);
   return (
     <div className="App">
@@ -24,6 +24,6 @@ function App({ lists }) {
 }
 
 const mapStateToProps = state => ({
-  lists: state.list.list
+  lists: state.todo.list
 });
 export default connect(mapStateToProps)(App);
