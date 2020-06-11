@@ -41,6 +41,7 @@ export const initialState = {
   showTodoForm: false
 };
 function list(state = initialState, action) {
+  const newState = Object.assign({}, state);
   switch (action.type) {
     case actions.GET_TODOS:
       return { state };
@@ -48,37 +49,30 @@ function list(state = initialState, action) {
     case actions.ADD_TODO:
       
       let { listKey = 0, title, body } = action.payload;
-      const modifyState = Object.assign({},state )
-      const modifiedStateList = [...modifyState.list[listKey].todos, {title, body}] //ne todo list for the id provided
-      modifyState.list[listKey].todos = modifiedStateList
-      console.log('new state methods',modifyState.list, modifiedStateList)
+      const modifiedStateList = [...newState.list[listKey].todos, {title, body}] //ne todo list for the id provided
+      newState.list[listKey].todos = modifiedStateList
       // modifyState.list = modifiedStateList
       return {
         ...state,
-        list: [...modifyState.list]
+        list: [...newState.list]
       };
     case actions.DELETE_TODO:
       let { listId, todoId } = action.payload;
-      let newState = Object.assign({}, state);
       let newTodos = newState.list[listId].todos.filter((_, i) => {
         return i !== todoId;
       });
       newState.list[listId].todos = newTodos;
-      console.log("NEw state", newState, listId);
-
       return {
         ...state,
         list: [...newState.list]
       };
     case actions.UPDATE_SEARCH:
       //gets new value entered by user and updates the input value of the todo list
-      let stateClone = Object.assign({}, state);
-
       const { list_ID, value } = action.payload;
-      let newList = (stateClone.list[list_ID].inputValue = value);
+      let newList = (newState.list[list_ID].inputValue = value);
       return {
         ...state,
-        list: [...stateClone.list]
+        list: [...newState.list]
       };
     default:
       return state;
