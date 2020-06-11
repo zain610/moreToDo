@@ -9,7 +9,7 @@ function App({ lists }) {
     <div className="App">
       {lists.map((todoList, index) => {
         const { id, header, todos, inputValue } = todoList;
-        console.log(inputValue);
+        console.log("todos", todos)
         return (
           <TodoList
             inputValue={inputValue}

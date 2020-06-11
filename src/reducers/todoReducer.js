@@ -1,6 +1,7 @@
 //import actions
 import * as actions from "../actions/actions";
 import { combineReducers } from "redux";
+import update from 'immutability-helper'
 
 //initialise state
 // class TodoList {
@@ -40,25 +41,21 @@ export const initialState = {
   showTodoForm: false
 };
 function list(state = initialState, action) {
-  const currentLists = state.list.slice();
   switch (action.type) {
     case actions.GET_TODOS:
       return { state };
 
     case actions.ADD_TODO:
-      console.log("payload", action);
+      
       let { listKey = 0, title, body } = action.payload;
-      const addNewTodo = [...currentLists[listKey].todos, { title, body }];
-      const remainingListItems = state.list.splice(listKey, 1);
+      const modifyState = Object.assign({},state )
+      const modifiedStateList = [...modifyState.list[listKey].todos, {title, body}] //ne todo list for the id provided
+      modifyState.list[listKey].todos = modifiedStateList
+      console.log('new state methods',modifyState.list, modifiedStateList)
+      // modifyState.list = modifiedStateList
       return {
         ...state,
-        list: [
-          (state.list[listKey] = {
-            ...state.list[listKey],
-            todos: addNewTodo
-          }),
-          ...remainingListItems
-        ]
+        list: [...modifyState.list]
       };
     case actions.DELETE_TODO:
       let { listId, todoId } = action.payload;
