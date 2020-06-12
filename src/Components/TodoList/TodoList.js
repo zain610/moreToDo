@@ -4,7 +4,7 @@ import Header from "../Todo/Header";
 import { connect } from "react-redux";
 import "../../App.css";
 
-function TodoList({ listId, todo, inputValue }) {
+function TodoList({ listId, todo, inputValue, setDrag, X, Y, dragging }) {
   //ProTip: Use arrow functions over regular functions to bind _this. Else you need to manually bind this in the constructor
   // const removeTodo = id => {
   //   console.log("id", id);
@@ -16,10 +16,13 @@ function TodoList({ listId, todo, inputValue }) {
   //Clicks on list border - mousedown
   //get and record X and Y
   const onMouseDownHandler = e => {
-    console.log(e.clientX, e.clientY);
+    console.log("mouse down ", e.clientX, e.clientY)
+    setDrag(true)
   };
-  //Leaves border - mouse up
-  //
+  let draggingStyle = {
+    left: `${X}px`,
+    top: `${Y}px`
+  }
   const filteredTodos = todo.filter(item => {
     return (
       item.title.toLowerCase().includes(inputValue) ||
@@ -27,7 +30,7 @@ function TodoList({ listId, todo, inputValue }) {
     );
   });
   return (
-    <div className="todoList" onMouseDown={onMouseDownHandler.bind(this)}>
+    <div style={draggingStyle} className="todoList" onMouseDown={onMouseDownHandler.bind(this)}>
       <Header listId={listId} inputValue={inputValue} />
       <hr />
       {filteredTodos.map((todo, i) => (

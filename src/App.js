@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import TodoList from "./Components/TodoList/TodoList";
 
 import { connect } from "react-redux";
 function App({ lists }) {
   console.log(lists);
+  const [dragging, setDrag] = useState(false)
+  const [X, setX] = useState(0)
+  const [Y, setY] = useState(0)
+  const onMouseMoveHandle = e => {
+    if(dragging){
+
+      console.log("moving", e.clientX, e.clientY)
+      setX(e.clientX)
+      setY(e.clientY)
+    }
+  }
+  const onMouseUpHandle = e => {
+    
+    setDrag(false)
+  }
   return (
-    <div className="App">
+    <div className="App" onMouseMove={onMouseMoveHandle} onMouseUp={onMouseUpHandle}>
       {lists.map((todoList, index) => {
         const { id, header, todos, inputValue } = todoList;
         console.log("todos", todos)
@@ -16,6 +31,10 @@ function App({ lists }) {
             listId={index}
             key={id}
             todo={todos}
+            setDrag={setDrag}
+            X={X}
+            Y={Y}
+            dragging={dragging}
           />
         );
       })}
