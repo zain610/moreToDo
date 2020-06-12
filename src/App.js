@@ -10,18 +10,13 @@ function App({ lists }) {
   const [Y, setY] = useState(0)
   const onMouseMoveHandle = e => {
     if(dragging){
-
       console.log("moving", e.clientX, e.clientY)
       setX(e.clientX)
       setY(e.clientY)
     }
   }
-  const onMouseUpHandle = e => {
-    
-    setDrag(false)
-  }
   return (
-    <div className="App" onMouseMove={onMouseMoveHandle} onMouseUp={onMouseUpHandle}>
+    <div className="App">
       {lists.map((todoList, index) => {
         const { id, header, todos, inputValue } = todoList;
         console.log("todos", todos)
