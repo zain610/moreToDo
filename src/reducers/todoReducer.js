@@ -1,6 +1,6 @@
 //import actions
 import * as actions from "../actions/actions";
-import {initialState} from "../Constants/InitialState"
+import { initialState } from "../Constants/InitialState";
 
 //initialise state
 // class TodoList {
@@ -10,7 +10,6 @@ import {initialState} from "../Constants/InitialState"
 //   todos = []
 // }
 
-
 function todo(state = initialState, action) {
   const newState = Object.assign({}, state);
   switch (action.type) {
@@ -18,10 +17,12 @@ function todo(state = initialState, action) {
       return { state };
 
     case actions.ADD_TODO:
-      
       let { listKey = 0, title, body } = action.payload;
-      const modifiedStateList = [...newState.list[listKey].todos, {title, body}] //ne todo list for the id provided
-      newState.list[listKey].todos = modifiedStateList
+      const modifiedStateList = [
+        ...newState.list[listKey].todos,
+        { title, body }
+      ]; //ne todo list for the id provided
+      newState.list[listKey].todos = modifiedStateList;
       // modifyState.list = modifiedStateList
       return {
         ...state,
@@ -44,6 +45,21 @@ function todo(state = initialState, action) {
       return {
         ...state,
         list: [...newState.list]
+      };
+    case actions.ADD_LIST:
+      console.log("add list");
+      const addNewList = {
+        id: 3,
+        inputValue: "",
+        header: "List 2",
+        todos: [
+          { title: "List 2 todo 1", body: "" },
+          { title: "List 12todo 2", body: "alkjsnfasf" }
+        ]
+      };
+      return {
+        ...state,
+        list: [...state.list, addNewList]
       };
     default:
       return state;

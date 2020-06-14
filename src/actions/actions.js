@@ -5,7 +5,7 @@ export const GET_TODOS = "GET_TODOS";
 export const ADD_TODO = "ADD_TODO";
 export const UPDATE_SEARCH = "UPDATE_SEARCH";
 export const DELETE_TODO = "DELETE_TODO";
-export const ADD_LIST = "ADD_LIST"
+export const ADD_LIST = "ADD_LIST";
 
 /*
  * other constants
@@ -30,5 +30,11 @@ export function deleteTodo(payload) {
 export function getTodos() {
   return {
     type: GET_TODOS
+  };
+}
+export function addList(payload) {
+  return {
+    type: ADD_LIST,
+    payload
   };
 }

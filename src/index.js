@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import todoApp from "./reducers/todoReducer";
+import todoApp from "./reducers/reducers";
 import "./index.css";
 import App from "./App";
 
