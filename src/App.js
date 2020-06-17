@@ -8,15 +8,21 @@ function App({ lists }) {
   const [dragging, setDrag] = useState(false)
   const [X, setX] = useState(0)
   const [Y, setY] = useState(0)
+  const [moveList, selectList] = useState(0)
   const onMouseMoveHandle = e => {
     if(dragging){
       console.log("moving", e.clientX, e.clientY)
-      setX(e.clientX)
+      setX(e.clientX-150)
       setY(e.clientY)
     }
   }
+  const onMouseUpHandler = e => {
+    console.log("mouse up", X, Y)
+    setDrag(false)
+    
+  }
   return (
-    <div className="App">
+    <div className="App" onMouseMove={onMouseMoveHandle} onMouseUp={onMouseUpHandler}>
       {lists.map((todoList, index) => {
         const { id, header, todos, inputValue } = todoList;
         console.log("todos", todos)
@@ -30,6 +36,7 @@ function App({ lists }) {
             X={X}
             Y={Y}
             dragging={dragging}
+            moveList = {moveList}
           />
         );
       })}
