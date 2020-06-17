@@ -4,17 +4,15 @@ import Header from "../Todo/Header";
 import { connect } from "react-redux";
 import "../../App.css";
 
-function TodoList({ listId, todo, inputValue, setDrag, X, Y, moveList }) {
-  console.log(X, Y)
-  const [offSetX, setOffsetX] = useState(X)
-  const [offSetY, setOffsetY] = useState(Y)
+function TodoList({ listId, todo, inputValue, setDrag,selectList, listPosition }) {
   const onMouseDownHandler = e => {
     console.log("mouse down ", e.clientX, e.clientY,listId)
     setDrag(true)
+    selectList(listId)
   };
   let finalListStyle = {
-    left: `${X}px`,
-    top: `${Y}px`
+    left: `${listPosition.X}px`,
+    top: `${listPosition.Y}px`
   }
   const filteredTodos = todo.filter(item => {
     return (
