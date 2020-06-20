@@ -7,10 +7,15 @@ import { connect } from "react-redux";
 import * as actions from "./actions/actions";
 
 function App({ todos, dispatch, lists }) {
+  const [X, setX] = useState(0);
+  const [Y, setY] = useState(0);
+
   const onAddListHandler = () => {
     console.log("handling add list button click");
+    // TODO complete this action
     dispatch(actions.addList({}));
   };
+<<<<<<< HEAD
   console.log(lists);
   const [dragging, setDrag] = useState(false)
   const [X, setX] = useState(0)
@@ -40,18 +45,33 @@ function App({ todos, dispatch, lists }) {
   }
   return (
     <div className="App" onMouseMove={onMouseMoveHandle} onMouseUp={onMouseUpHandler}>
+=======
+  const onHandleListDrag = e => {
+    console.log("dragging", e.clientX, e.clientY);
+    setX(e.clientX);
+    setY(e.clientY);
+  };
+  return (
+    <div className="App" onDrag={onHandleListDrag}>
+>>>>>>> 51ad208751b451455bee50497195d66a90317d3c
       {lists.map((todoList, index) => {
         const { id, header, todos, inputValue } = todoList;
+
         return (
           <TodoList
             inputValue={inputValue}
             listId={index}
             key={id}
             todo={todos}
+<<<<<<< HEAD
             setDrag={setDrag}
             listPosition={listPosition[index]}
             dragging={dragging}
             selectList = {selectList}
+=======
+            X={X}
+            Y={Y}
+>>>>>>> 51ad208751b451455bee50497195d66a90317d3c
           />
         );
       })}
@@ -59,9 +79,12 @@ function App({ todos, dispatch, lists }) {
         class="addTodoList-btn"
         style={{
           display: "float",
-          background: "white",
+          background: "beige",
           height: "max-content",
-          borderRadius: "50px"
+          borderRadius: "50px",
+          position: "absolute",
+          bottom: "1%",
+          right: "1%"
         }}
       >
         <FontAwesomeIcon
