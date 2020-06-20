@@ -1,5 +1,27 @@
 # moreToDo
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This note taking application is a take on the plain ol' Todo application but with extra powers. Built with React and Redux, this application allows the managing of multi-todolists and being able to drag the lists around. 
+
+## Features
+1. Add/Delete Todos
+2. Add Todo Lists
+3. Search for todos in an individual list
+4. Hides the body of the todo so as to not clutter the screen with extra information. 
+5. Drag todos around the screen. 
+
+## Tech Stack
+1. React 
+2. Redux
+
+## TODO ( In Progress )
+1. Permanent State storage
+  a. MySQL database
+  b. MongoDB
+  b. Use LocalStorage
+2. Implement Update todo 
+3. Create drop zones for the todos to complete the entire 'drag-drop' lifecycle
+4. Optimize the application -- as it stands, I belive it has a fair bit of spaghetti code 
+  a. intergrate useReducer() hooks
+5. Improve the User Interface
 
 ## Available Scripts
 
