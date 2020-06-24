@@ -1,19 +1,26 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Todo from "../Todo/Todo";
 import Header from "../Todo/Header";
 import { connect } from "react-redux";
 import "../../App.css";
 
-function TodoList({ listId, todo, inputValue, setDrag,selectList, listPosition }) {
+function TodoList({
+  listId,
+  todo,
+  inputValue,
+  setDrag,
+  selectList,
+  listPosition
+}) {
   const onMouseDownHandler = e => {
-    console.log("mouse down ", e.clientX, e.clientY,listId)
-    setDrag(true)
-    selectList(listId)
+    console.log("mouse down ", e.clientX, e.clientY, listId);
+    setDrag(true);
+    selectList(listId);
   };
   let finalListStyle = {
     left: `${listPosition.X}px`,
     top: `${listPosition.Y}px`
-  }
+  };
   const filteredTodos = todo.filter(item => {
     return (
       item.title.toLowerCase().includes(inputValue) ||
@@ -21,7 +28,11 @@ function TodoList({ listId, todo, inputValue, setDrag,selectList, listPosition }
     );
   });
   return (
-    <div style={finalListStyle} className="todoList" onMouseDown={onMouseDownHandler}>
+    <div
+      style={finalListStyle}
+      className="todoList"
+      onMouseDown={onMouseDownHandler}
+    >
       <Header listId={listId} inputValue={inputValue} />
       <hr />
       {filteredTodos.map((todo, i) => (
