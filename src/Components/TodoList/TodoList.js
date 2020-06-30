@@ -6,12 +6,12 @@ import "../../App.css";
 
 function TodoList({
   listId,
-  todo,
-  inputValue,
+  todoList,
   setDrag,
   selectList,
   listPosition
 }) {
+  const {todos, inputValue } = todoList;
   const onMouseDownHandler = e => {
     console.log("mouse down ", e.clientX, e.clientY, listId);
     setDrag(true);
@@ -21,7 +21,7 @@ function TodoList({
     left: `${listPosition.X}px`,
     top: `${listPosition.Y}px`
   };
-  const filteredTodos = todo.filter(item => {
+  const filteredTodos = todos.filter(item => {
     return (
       item.title.toLowerCase().includes(inputValue) ||
       item.body.toLowerCase().includes(inputValue)

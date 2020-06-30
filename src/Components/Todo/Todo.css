@@ -2,10 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin: 0 0.5rem;
+  
 }
 
 .todo {
-  margin: 0.75rem;
+  margin: 0 0.75rem 0.75rem 0.75rem;
   border-bottom: 2px solid #333;
+  font-size: 0.8rem;
+}
+.toggleStatus-icon{
+  font-size: 1.5rem;
+  padding: 10px 10px 0 10px;
+  color: mediumpurple;
+}
+.deleteTodo-icon {
+    font-size: 1.2rem;
+    padding: 10px 10px 0 10px;
+    color: #333333;
+}
+.body {
+  margin: 0.75rem;
 }

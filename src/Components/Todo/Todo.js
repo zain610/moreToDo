@@ -16,47 +16,27 @@ function Todo({ listId, todo, dispatch, index }) {
     toggleHide(!hide);
   };
   const iconDirection =
-    hide === true ? (
       <FontAwesomeIcon
         onClick={toggleStatus}
-        style={{
-          fontSize: "2rem",
-          padding: "10px 10px 0 10px",
-          color: "mediumpurple"
-        }}
-        icon={faAngleDown}
+        className="toggleStatus-icon"
+        icon={hide ? faAngleDown : faAngleUp}
       />
-    ) : (
-      <FontAwesomeIcon
-        onClick={toggleStatus}
-        style={{
-          fontSize: "2rem",
-          padding: "10px 10px 0 10px",
-          color: "mediumpurple"
-        }}
-        icon={faAngleUp}
-      />
-    );
   return (
     <div className="todo">
       <div className="header">
         <h1>{todo.title}</h1>
-        <div className="action-btn-div">
+        <div className="action-btn">
           {iconDirection}
           <FontAwesomeIcon
             onClick={() => {
               dispatch(deleteTodo({ listId, todoId }));
             }}
             icon={faTrash}
-            style={{
-              fontSize: "1.5rem",
-              padding: "10px 10px 0 10px",
-              color: "#333"
-            }}
+            className="deleteTodo-icon"
           />
         </div>
       </div>
-      {hide === false ? <p>{todo.body}</p> : ""}
+      {!hide ? <p className="body">{todo.body}</p> : ""}
     </div>
   );
 }

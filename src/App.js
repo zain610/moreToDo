@@ -18,7 +18,7 @@ import * as actions from "./actions/actions";
 function App({ todos, dispatch, lists }) {
   const [X, setX] = useState(0);
   const [Y, setY] = useState(0);
-
+//shift this to a action-reducer
   const onAddListHandler = () => {
     console.log("handling add list button click");
     // TODO complete this action
@@ -57,14 +57,11 @@ function App({ todos, dispatch, lists }) {
       onMouseUp={onMouseUpHandler}
     >
       {lists.map((todoList, index) => {
-        const { id, header, todos, inputValue } = todoList;
-
         return (
           <TodoList
-            inputValue={inputValue}
             listId={index}
-            key={id}
-            todo={todos}
+            key={index}
+            todoList={todoList}
             setDrag={setDrag}
             listPosition={listPosition[index]}
             dragging={dragging}
@@ -73,24 +70,11 @@ function App({ todos, dispatch, lists }) {
         );
       })}
       <div
-        class="addTodoList-btn"
-        style={{
-          display: "float",
-          background: "beige",
-          height: "max-content",
-          borderRadius: "50px",
-          position: "absolute",
-          bottom: "1%",
-          right: "1%"
-        }}
+        className="addTodoList-btn"
       >
         <FontAwesomeIcon
           onClick={onAddListHandler}
-          style={{
-            fontSize: "2rem",
-            padding: "10px",
-            color: "mediumpurple"
-          }}
+          className='addTodoList-icon'
           icon={faPlus}
         />
       </div>
